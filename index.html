@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hangman</title>
+		<style>
+		* {
+			color: white;
+			font-family: "Comic Sans MS", "Comic Sans MS5", cursive;
+		}
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			background-color: black;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 20px;
+			text-align: center;
+			overflow: scroll;
+		}
+		
+		h1 {
+			width: 20%;
+			height: 250px;
+			background-image: url("assets/images/hangman.gif");
+			background-size: contain;
+			border-radius: 25px;
+			margin: 0 auto;
+		}
+
+		.logo {
+			color: black;
+			text-align: center;
+			margin: 0 auto;
+			position: relative;
+			top: 80%;
+		}
+
+		span {
+			color: red;
+		}
+
+		</style>
+	</head>
+	<body>
+	<div class="container">
+		<h1><div class="logo">Hangman Game</div></h1>
+		<h4>Word: </h6><span id="spaces"></span>
+		<h4>Letters Guessed: </h4><span id="guesses">What's a letter?</span>
+		<h4>Guess Remaining: </h4><span id="lives">12</span>
+		<h4>Wins: </h4><span id="wins">0</span>
+		<h4>Losses: </h4><span id="losses">0</span>
+	</div>
+	</body>
+	<script>
+
+		//Starting Variables
+		var options = ["red", "blue", "green", "yellow", "white", "black"];
+		var random = "";
+		var randomArray = [];
+		var spacesArray = [];
+		var spacesString = "";
+		var guesses = [];
+		var guessesCorrect = 0;
+		var lives = 12;
+		var wins = 0;
+		var losses = 0;
+
+		function start() {
+			random = options[Math.floor(Math.random() * options.length)];
+			randomArray = random.split("");
+
+			console.log(random);
+
+			for (i = 0; i < random.length; i++) {
+				spacesArray.push("_");
+			}
+			spacesString = spacesArray.join(" ");
+			document.getElementById("spaces").innerHTML = spacesString;
+			console.log(spacesString);
+			console.log(randomArray);
+		}
+
+		start()
+
+		document.onkeyup = function() {
+			//Checks whether user has pressed the key previously. If not then add it to the guesses list and continue
+			if (guesses.indexOf(event.key) === -1) {
+				guesses.push(event.key);
+				document.getElementById("guesses").innerHTML = guesses;
+				//If the letter matches a letter in the word
+				if (randomArray.indexOf(event.key) > -1) {
+					for (var i = 0; i < randomArray.length; i++) {
+						if (randomArray[i] === event.key) {
+							spacesArray[i] = event.key
+							spacesString = spacesArray.join(" ");
+							document.getElementById("spaces").innerHTML = spacesString;
+							guessesCorrect++;
+							console.log(guessesCorrect);
+						}
+					}
+				//If the letter is wrong
+				} else {
+					lives--;
+					document.getElementById("lives").innerHTML = lives;
+				}
+			}
+			if (guessesCorrect === random.length) {
+				wins++;
+				document.getElementById("wins").innerHTML = wins;
+				reset();
+			} else if (lives === 0) {
+				losses++;
+				document.getElementById("losses").innerHTML = losses;
+				reset();
+			}
+		}
+
+			function reset() {
+				random = "";
+				randomArray = [];
+				spacesArray = [];
+				spacesString = "";
+				guesses = [];
+				guessesCorrect = 0;
+				lives = 12;
+				
+				document.getElementById("guesses").innerHTML = guesses;
+				document.getElementById("lives").innerHTML = lives;
+
+				start();
+			}
+
+	</script>
+</html>

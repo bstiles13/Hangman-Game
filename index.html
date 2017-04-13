@@ -25,7 +25,7 @@
 			width: 20%;
 			height: 250px;
 			background-image: url("assets/images/hangman.gif");
-			background-size: contain;
+			background-size: cover;
 			border-radius: 25px;
 			margin: 0 auto;
 		}
@@ -48,8 +48,8 @@
 	<div class="container">
 		<h1><div class="logo">Hangman Game</div></h1>
 		<h4>Word: </h6><span id="spaces"></span>
-		<h4>Letters Guessed: </h4><span id="guesses">What's a letter?</span>
-		<h4>Guess Remaining: </h4><span id="lives">12</span>
+		<h4>Letters Guessed: </h4><span id="guesses">none</span>
+		<h4>Guesses Remaining: </h4><span id="lives">12</span>
 		<h4>Wins: </h4><span id="wins">0</span>
 		<h4>Losses: </h4><span id="losses">0</span>
 	</div>
@@ -57,7 +57,7 @@
 	<script>
 
 		//Starting Variables
-		var options = ["red", "blue", "green", "yellow", "white", "black"];
+		var options = ["red", "blue", "green", "yellow", "white", "black", "orange", "violet", "olive", "turquoise", "lime", "cyan", "azure", "beige", "lilac", "violet", "white", "cherry", "cream"];
 		var random = "";
 		var randomArray = [];
 		var spacesArray = [];
@@ -110,10 +110,12 @@
 			if (guessesCorrect === random.length) {
 				wins++;
 				document.getElementById("wins").innerHTML = wins;
+				new Audio("assets/images/clapping.mp3").play();
 				reset();
 			} else if (lives === 0) {
 				losses++;
 				document.getElementById("losses").innerHTML = losses;
+				new Audio("assets/images/buzzer.mp3").play();
 				reset();
 			}
 		}

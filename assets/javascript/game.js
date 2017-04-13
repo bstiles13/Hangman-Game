@@ -1,7 +1,7 @@
 		$(document).ready(function() {
 	
 		//Starting Variables
-		var options = ["red", "blue", "green", "yellow", "white", "black", "orange", "violet", "olive", "turquoise", "lime", "cyan", "azure", "beige", "lilac", "violet", "white", "cherry", "cream"];
+		var options = ["red", "blue", "green", "yellow", "white", "black", "orange", "violet", "olive", "turquoise", "lime", "cyan", "azure", "beige", "lilac", "violet", "white", "cherry", "cream", "purple", "magenta", "indigo", "azure", "coral", "crimson", "ivory", "silver"];
 		var random = "";
 		var randomArray = [];
 		var spacesArray = [];
@@ -73,7 +73,7 @@
 				guessesCorrect = 0;
 				lives = 12;
 				
-				document.getElementById("guesses").innerHTML = guesses;
+				document.getElementById("guesses").innerHTML = "none";
 				document.getElementById("lives").innerHTML = lives;
 
 				start();
